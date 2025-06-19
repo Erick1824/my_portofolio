@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Writer | Spesialis Generasi Video & Gambar AI</title>
+    <style>
+
+        /* Global Styles */
+        :root {
+            --primary-color: #ee02c7ee;
+            --secondary-color: #90e0ef;
+            --accent-color: #08d2fa;
+            --text-color: #181818;
+            --light-color: rgb(255, 255, 248);
+            --dark-color: #000000;
+            --gray-color: #11d1d8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .main-container {
+            flex: 1;
+            margin-left: 340px; /* Memberi jarak untuk sidebar */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 320px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+            border: 5px solid #3498db;
+        }
+        
+        .profile-name {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .profile-title {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+        }
+        
+        .profile-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title-sidebar {
+            font-size: 18px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        .info-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-item i {
+            margin-right: 10px;
+            color: #3498db;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .sidebar-social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .sidebar-social-links a:hover {
+            color: #3498db;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-color), var(--light-color));
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: var(--primary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--gray-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .service-card p {
+            margin-bottom: 15px;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--light-color);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .portfolio-info {
+            padding: 20px;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .portfolio-info p {
+            margin-bottom: 15px;
+        }
+        
+        .prompt-example {
+            background-color: var(--gray-color);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        /* Gallery Section */
+        .galeri-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .foto-item {
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .foto-item img {
+            width: 100px;      
+            height: 100px;     
+            object-fit: cover;
+            border-radius: 10px;  
+}
+
+        .foto-item h3 {
+            margin: 10px 0 5px 0;
+            font-size: 18px;
+        }
+
+        .foto-item p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--gray-color);
+            text-align: center;
+        }
+        
+        .contact-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-info p {
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .contact-method {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-method i {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: var(--light-color);
+            font-size: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            body {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero h2 {
+                font-size: 20px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 30px;
+            }
+            
+            .services-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-method {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar di sebelah kiri -->
+    <div class="sidebar">
+        <img src="profil.jpg" alt="Foto Profil" class="profile-img">
+        <h1 class="profile-name">Muh Erick Prasetyo</h1>
+        <p class="profile-title">AI Prompt Specialist</p>
+        
+        <div class="profile-section">
+            <h2 class="section-title-sidebar">Informasi Pribadi</h2>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <span>muherickprasetyo123@gmail.com</span>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>+62-82146658301</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-briefcase"></i>
+                <span>Upwork: muherickprasetyo</span>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2 class="section-title-sidebar">Keahlian</h2>
+            <div class="info-item">
+                <i class="fas fa-video"></i>
+                <span>AI Video Generation</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-image"></i>
+                <span>AI Image Creation</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-bullhorn"></i>
+                <span>Marketing Content</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-social-links">
+            <a href="https://www.instagram.com/erickk_garciiaa?igsh=ZGd4M3NseHV1YWpz" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/erick-devany-5b3304311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/share/1Ekb5ZHKdi/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@erick_garciaa18?_t=ZS-8xIckiyH76v&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+    
+    <!-- Konten utama -->
+    <div class="main-container">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <nav>
+                    <div class="logo">AI <span>Prompt</span> Writer</div>
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>AI Prompt Writer | Spesialis Generasi Video & Gambar AI</h1>
+                <h2>Helping businesses, content creators, and marketing agencies produce high-quality AI visuals that are engaging, effective, and tailored to your needs.</h2>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Professional AI Prompt Writer</h3>
+                        <p>I am a professional AI Prompt Writer with experience in creating prompts for AI videos and images. With experience in over 50+ successful projects, I am ready to help produce quality visual content for various business, marketing, and personal branding needs..</p>
+                        <p>My expertise lies in crafting precise, effective prompts that generate stunning AI visuals tailored to your specific requirements. Whether you need eye-catching social media content, product advertisements, or educational materials, I can create the perfect prompts to bring your vision to life.</p>
+                        <a href="#portfolio" class="btn">View My Work</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">My Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>AI Video Prompts</h3>
+                        <p>Custom prompts for generating high-quality AI videos for various purposes including advertisements, social media, and educational content.</p>
+                        <p>Perfect for businesses looking to create engaging video content without expensive production costs.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>AI Image Prompts</h3>
+                        <p>Specialized prompts for generating stunning AI images tailored to your brand's aesthetic and messaging.</p>
+                        <p>Ideal for product visualization, marketing materials, and social media content.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Marketing Content</h3>
+                        <p>Custom prompts designed specifically for marketing campaigns that convert.</p>
+                        <p>Create visuals that resonate with your target audience and drive engagement.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Product & Branding</h3>
+                        <p>Visual AI for product advertisements and brand identity development.</p>
+                        <p>Showcase your products in the best light with AI-generated visuals.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Social Media Visuals</h3>
+                        <p>Eye-catching AI-generated content optimized for various social media platforms.</p>
+                        <p>Increase engagement and grow your following with stunning visuals.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Business & Education</h3>
+                        <p>Professional presentation materials and educational content created with AI.</p>
+                        <p>Enhance your business communications with compelling visuals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <h2 class="section-title">PROJECT VIDEO AI</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <video class="portfolio-video" controls>
+                            <source src="video-Marketing.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-info">
+                            <h3>BURGER ADVERTISEMENT</h3>
+                            <p>A burger video ad created with artificial intelligence. The ad is designed to highlight the deliciousness and texture of the burger.</p>
+                            <div class="prompt-example">
+                                <strong>PROMPT :</strong><br>
+                                "A white man in his early 30s, wearing a stylish jacket, walking confidently through a busy modern city street during the daytime. The background is filled with tall buildings, storefronts, pedestrians, and bright yellow taxis driving by. He is holding a large, juicy hamburger in one hand, wrapped in branded paper. The camera follows him from the front as he walks.
+
+                                 As he stops walking and smiles, he lifts the burger and says: “Wow, this is what I was looking for… every bite melts in your mouth.”
+                                 Then he takes a big bite of the burger. The camera cuts to a slow zoom-in shot of his satisfied expression as he chews, enjoying the flavor. Slight depth-of-field blur is applied to the background, focusing on his face and the burger.
+                                 
+                                 Actor/Dialogue : Natural male voice with a slight American accent when speaking dialogue.
+
+                                Urban city sounds  gentle breeze.
+
+                                Light crunching sound as he bites into a burger        
+                                Style :cinematic
+
+                                Lighting : daylight with minimal lens flare.
+
+                                Motion : handheld camera effect for realism.
+
+                                Effects:
+
+                                Depth of field focus on burger and face
+
+                                Slight slow motion on burger bite
+
+                                Soft color grading to enhance warmth and appetizing tones
+
+                                Taxi in background drives slowly for realismBackground Music: Upbeat and energetic instrumental music (urban pop or indie groove), volume slightly lowered when he speaks.
+                            </div>
+                        </div>
+                    </div>
+                     <div class="portfolio-item">
+                        <video class="portfolio-video" controls>
+                            <source src="war.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-info">
+                            <h3>SMARTPHONE PROMOTION</h3>
+                            <p>AI-generated video ads for smartphone advertising. These ads are designed to highlight the advantages and sophistication of smartphones.</p>
+                            <div class="prompt-example">
+                                <strong>PROMPT :</strong><br>
+                                "A male soldier in full military uniform and helmet is caught in the middle of a fierce battlefield. He looks panicked and is hiding behind debris as gunfire and explosions erupt all around him. Suddenly, he pulls out a brand-new smartphone from his pocket.
+                                Despite the chaos, he turns to the camera with a frightened expression, holding up his smartphone as if to promote it. A large bomb explodes in the background.
+                                Voice-over/Dialogue:
+                                Spoken with fear and urgency, while holding a smartphone:
+
+                                 “Oh my God! This smartphone really keeps me connected… even here!”
+
+                                 Background Audio:
+
+                                  Loud bomb explosions
+
+                                 Gunfire from multiple directions (near and far)
+
+                                 Sounds of strong wind and explosions
+
+                                 Low rumbling or vibrations during explosions
+
+                                 style: Cinematic, intense, realistic
+
+                                 Purpose: Dramatic smartphone promotion or dark humor."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <video class="portfolio-video" controls>
+                            <source src="skydiving.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-info">
+                            <h3>BEVERAGE ADVERTISEMENT</h3>
+                            <p>AI-generated explainer video about a beverage advertisement promotion. This task requires clear and informative visuals with academic accuracy.</p>
+                            <div class="prompt-example">
+                                <strong>PROMPT :</strong><br>
+                                "A European man is skydiving from an airplane at high altitude. He is wearing a full professional skydiving outfit, including goggles, gloves, helmet, and a wingsuit. He is joyfully free-falling in the sky, holding a clear bottle of isotonic energy drink with condensation on it. The sky is bright blue, filled with fluffy white clouds. A plane is visible in the background, flying nearby. As he descends, he looks at the camera and shouts with excitement:
+
+                                "Woooww! This isotonic drink is full of energy!" 
+
+                                Zoom in slightly on the bottle as he lifts it triumphantly. Include wind effects and a little camera shake to simulate movement.
+
+                                Style Visual:
+
+                                Realistic cinematic look
+
+                                High energy, fast paced
+
+                                Bright daytime lighting
+
+                                Add blur effect to the bottle for dynamic effect."
+                            </div>
+                        </div>
+                    </div>
+                <div class="portfolio-item">
+                        <video class="portfolio-video" controls>
+                            <source src="Action_Scene_Video_Ready.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-info">
+                            <h3>ACTION SCENE </h3>
+                            <p>AI generated videos for short action video scenes.</p>
+                            <div class="prompt-example">
+                                <strong>PROMPT :</strong><br>
+                                ""Create a high-quality, cinematic-style video of a young man wearing a tactical military vest, holding a gun in his hand with a firm grip. He stands in the middle of a war-torn city, surrounded by destroyed buildings, debris, and smoke. The atmosphere is gloomy and chaotic, with explosions and gunfire in the distance in the background. The camera angle should be dynamic, perhaps a medium close-up with a slightly low angle to emphasize his determination. The lighting should be dramatic, with flashes of explosions reflecting on his face. Audio: includes realistic sound effects of bombs exploding, sporadic gunfire, enhancing the battlefield atmosphere.
+                                Additional Details (Optional):
+
+Style: Very realistic, cinematic war movie aesthetic (similar to Call of Duty or Saving Private Ryan).
+
+Color Grading: Desaturated with high contrast, emphasizing orange and gray for a war-like feel.
+
+Camera Movement: Slight hand shake for intensity, slow motion to show the destruction behind.
+
+Facial Expression: Determined, slightly tired, with focused eyes."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <video class="portfolio-video" controls>
+                            <source src="vid far.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-info">
+                            <h3>EDUCATION PARMACY WORLD</h3>
+                            <p>A brief explanation of the world of pharmaceutical education and medical devices.</p>
+                            <div class="prompt-example">
+                                <strong>PROMPT :</strong><br>
+                               A professional Asian man in his 30s, wearing glasses and a clean white pharmaceutical lab coat, stands confidently in a bright, modern pharmacy office. He looks directly into the camera and says clearly: "Welcome to the world of pharmacy. Today we will explore how medicines are developed, tested, and distributed to you." Behind him, several pharmacy staff members (both male and female) are working—typing on computers, checking medicines, stocking shelves. The environment is bright with white and light blue colors. During his speech, two semi-transparent pharmaceutical tools appear on the screen as visual elements: one is a medicine tube on the left side, and the other is a laboratory beaker. These elements are smoothly animated and appear next to him without blocking the background. The video is in landscape format, cinematic quality, with smooth camera framing and natural indoor lighting
+                               Visual Style:
+Realistic or cinematic AI video
+
+Landscape orientation (16:9)
+
+Clear, sharp focus on pharmacist, subtle background blur
+
+Color palette: white, light blue, and soft gray (clean and clinical)
+Audio & Sound:
+Male voice-over delivering dialogue (neutral accent, friendly, confident)
+
+Background: soft corporate ambient music
+
+Add light ambient sounds: typing, gentle movement
+
+On-Screen Elements:
+Left side of screen: image/animation of pharmaceutical equipment
+
+Elements should appear subtly during the dialogue “how medicines are developed, tested, and distributed to you
+Format Notes:
+Duration: 8 seconds
+
+Use for: educational explanations, professional presentations, or pharmaceutical brand videos."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <video class="portfolio-video" controls>
+                            <source src="vlog.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-info">
+                            <h3>VLOG STYLE</h3>
+                            <p>AI-generated travel vlogger-style videos are perfect for Instagram and YouTube reels.</p>
+                            <div class="prompt-example">
+                                <strong>PROMPT :</strong><br>
+                                "Two young women are walking leisurely on a white sand beach with a beautiful tropical island in the background.
+
+They are wearing casual holiday clothes, sunglasses, and look cheerful while carrying a vlog camera and a small bag.
+
+Background: Clear blue sea, clear sky, coconut trees, and the island's mountains in the distance.
+
+When one of them faces the camera and says, "Welcome to this exotic island," the camera slowly shifts to an aerial shot like a drone shot.
+
+The camera moves up to reveal the entire panorama of the island from above, including the beach, sea, fishing boats, and green trees.
+
+Audio:
+
+The sound of crashing waves, tropical birds chirping, and some relaxing vlog background music (acoustic or lo-fi guitar).
+
+The narration is clear and sounds natural, like a traveler's vlog style.
+
+Narration (Voice Over by woman):
+
+"Welcome to this exotic island..."
+
+Duration: 8 seconds
+
+Video Style: Like YouTube vlog content or Instagram Reels about travel."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Gallery Section -->
+<section class="portfolio">
+    <div class="container">
+        <h2 class="section-title">PROJECT IMAGE AI</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="promosi1.jpg" alt="AI Generated Image" class="portfolio-img">
+                </div>
+                <div class="portfolio-info">
+                    <h3>PROMOTION WITH A CHALLENGING STYLE</h3>
+                    <p>Food promotion with a challenging style</p>
+                    <div class="prompt-example">PROMPT : A man is skydiving above the clouds with a wide view of the sky and a distant airplane flying in the background. He is wearing a professional black and yellow skydiving suit, complete with harness, parachute straps, gloves, and protective goggles. The man has short, styled brown hair and a beard, smiling confidently at the camera. In his right hand, he holds a bright orange snack package labeled "Pierrot" with crisp graphics and branding clearly visible. The lighting is bright, with natural daylight illuminating the scene, creating a dramatic and adventurous atmosphere.</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="promosi2.jpg" alt="AI Generated Image" class="portfolio-img">
+                </div>
+                <div class="portfolio-info">
+                    <h3>ISOTONIC DRINK</h3>
+                    <p>AI image generation for isotonic drink product sales</p>
+                    <div class="prompt-example">A confident man standing in the middle of a busy city street during daytime, holding a bottle of blue isotonic drink in his right hand. The man has short dark brown hair, a well-groomed beard, and is wearing a black leather jacket over a black shirt. He looks directly at the camera with a serious but approachable expression. The bottle label clearly reads "ISOTONIC" with vibrant blue and orange colors, and the branding is prominently displayed. The background features tall modern buildings, blurred crowds of people walking, and bright billboards, creating a dynamic urban atmosphere with natural daylight.
+
+</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="promosi3.jpg" alt="AI Generated Image" class="portfolio-img">
+                </div>
+                <div class="portfolio-info">
+                    <h3>ELECTRONIC GOODS ADVERTISEMENT</h3>
+                    <p>Generating images for smartphone promotions</p>
+                    <div class="prompt-example">Underwater scene with three snorkelers swimming among colorful coral reefs and tropical fish. The main subject, a smiling blonde woman in a blue wetsuit and diving mask, holds a smartphone with one hand and points at the phone screen with the other. The phone displays a clear photo of the same underwater scene. Behind her, two other snorkelers in red wetsuits swim nearby, wearing masks and snorkels. Several dolphins swim in the background, and vibrant marine life surrounds the coral reef. The water is crystal clear, with bright natural lighting that brings out the bright colors of the coral and fish.</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="farmasi.png" alt="AI Generated Image" class="portfolio-img">
+                </div>
+                <div class="portfolio-info">
+                    <h3>PHARMACY</h3>
+                    <p>AI generated images with health theme</p>
+                    <div class="prompt-example">PROMPT : A professional male and female pharmacist standing side by side in a clean, modern pharmacy. Both are wearing white lab coats over dark blue scrubs and are smiling warmly at the camera. The male pharmacist has short, dark brown hair and a trimmed beard. The female pharmacist has neatly tied-back black hair and natural makeup. They are holding a large white pharmaceutical box labeled “Generic” with printed text and a chart, positioned centrally between them, clearly facing the camera. Behind them is a bright pharmacy interior with white shelves stocked with various medicines and pharmaceutical products. Natural daylight streams through large windows, illuminating the scene with soft, even lighting. The overall mood is professional, friendly, and trustworthy.
+
+Visual Elements:
+Focus: The pharmacists and the box they are holding
+
+Clothing: Clean white lab coats, dark blue inner uniforms
+
+Facial Expression: Warm, approachable smiles
+
+Environment: Well-lit pharmacy with visible shelves, organized products, and soft daylight from a window
+
+Lighting: Bright and natural
+
+Orientation: Landscape
+
+                  </div>
+                </div>
+            </div>
+
+            <!-- Tambahan 2 gambar baru -->
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="aqua.png" alt="AI Generated Image" class="portfolio-img">
+                </div>
+                <div class="portfolio-info">
+                    <h3>MINERAL WATER PRODUCTS</h3>
+                    <p>Generating AI images for mineral water product promotion</p>
+                    <div class="prompt-example">PROMPT : A sweaty athletic man wearing sportswear is drinking from a bottled mineral water with the brand "AQUA". He is standing inside a stadium, with the stadium seats and field visible in the background. The man looks exhausted but refreshed as he drinks. The lighting is bright, natural daylight. The water bottle is clearly labeled "AQUA", similar to the real brand design, with transparent plastic and clear water inside. The scene captures the moment of refreshment after intense exercise.</div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="taro.png" alt="AI Generated Image" class="portfolio-img">
+                </div>
+                <div class="portfolio-info">
+                    <h3>SNACK PRODUCTS</h3>
+                    <p>AI image generation for snack product promotion</p>
+                    <div class="prompt-example">PROMPT : A young woman is happily eating a snack that looks like the one in the image (Taro Net Potato BBQ). She is holding the snack bag in one hand while taking a bite with the other. The scene is bright and cheerful, outdoors in natural light. She has a joyful expression, wearing casual clothes. The snack bag is colorful, with a similar design to Taro Net, clearly visible.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* CSS untuk membuat gambar persegi */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .portfolio-item {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .portfolio-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .img-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* Membuat tinggi sama dengan lebar (persegi) */
+        overflow: hidden;
+    }
+    
+    .portfolio-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Gambar akan menutupi area tanpa distorsi */
+        object-position: center;
+        transition: transform 0.3s ease;
+    }
+    
+    .portfolio-item:hover .portfolio-img {
+        transform: scale(1.05);
+    }
+    
+    .portfolio-info {
+        padding: 15px;
+        flex-grow: 1;
+    }
+    
+    .portfolio-info h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .portfolio-info p {
+        margin-bottom: 10px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        color: #333;
+    }
+</style>
+
+<style>
+    /* CSS untuk membuat gambar persegi */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .portfolio-item {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .img-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%; /* Membuat tinggi sama dengan lebar (persegi) */
+        overflow: hidden;
+    }
+    
+    .portfolio-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Gambar akan menutupi area tanpa distorsi */
+        object-position: center;
+    }
+    
+    .portfolio-info {
+        padding: 15px 0;
+    }
+</style>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact Me</h2>
+                <div class="contact-info">
+                    <p>If you're interested in working together, discussing a project, or just want to learn more about my services, please reach out through any of these channels:</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fab fa-whatsapp"></i>
+                            <p>WhatsApp:<br>+62-82146658301</p>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <p>Email:<br>muherickprasetyo123@gmail.com</p>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-briefcase"></i>
+                            <p>Upwork:<br>muherickprasetyo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>Portofolio AI Prompt Writer By Muh Erick Prasetyo</p>
+                <p>Powered by Generative AI - 2025</p>
+                <div class="sidebar-social-links">
+            <a href="https://www.instagram.com/erickk_garciiaa?igsh=ZGd4M3NseHV1YWpz" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/erick-devany-5b3304311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/share/1Ekb5ZHKdi/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@erick_garciaa18?_t=ZS-8xIckiyH76v&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
